@@ -30,6 +30,10 @@ def greet():
     return response
 
 
+@app.route('/')
+def index():
+	return ('<h1>All is working !</h1>')
+
 if __name__ == "__main__":
 	app.run(threaded=True)
 
