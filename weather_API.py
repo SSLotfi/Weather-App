@@ -1,19 +1,46 @@
+from flask import request, flask
 import requests
 import json
 
+app = Flask(__name__)
+
 KEY = "be1ae457a890894c4854d1796e11012f"
-city_name = ""
 
-# url = f"http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID={APIKEY}"
+@app.route("/weather/", methods=['GET'])
+def greet():
+    """get city name and show weather
+    """
+    # get username from the url params
+    cityname = request.args.get('city name', default=None, type=str)
 
-while True:
-        city_name = input("enter city name: ").strip()
-        if city_name == 'q':
-                break
-        params = {
-        "city_name":city_name
-        }
-        url = f"https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={KEY}&units=metric"
+    response = ""
+
+    if cityname:
+        url = f"https://api.openweathermap.org/data/2.5/weather?q={cityname}&appid={KEY}&units=metric"
         res = requests.get(url)
-        res = json.loads(res.text)
-        print(str(res['main']["temp"]) + " °C")
+        
+        try:
+            response = f"<h1>The current weather in {cityname} is {res['main']['temp']} °C</h1>"
+        except:
+            response = "<h1>city wasn't found :(</h1>"
+    else:
+        response = "<h1>city not found</h1>"
+
+    # return the response
+    return response
+
+
+if __name__ == "__main__":
+	app.run(threaded=True)
+
+# while True:
+#         city_name = input("enter city name: ").strip()
+#         if city_name == 'q':
+#                 break
+#         params = {
+#         "city_name":city_name
+#         }
+#         url = f"https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={KEY}&units=metric"
+#         res = requests.get(url)
+#         res = json.loads(res.text)
+#         print(str(res['main']["temp"]) + " °C")
