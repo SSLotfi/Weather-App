@@ -13,4 +13,6 @@ https://openweathermap.org/current
 
 https://weatherapp-salmashamel.herokuapp.com/weather/?cityname=alexandria
 
+replace "alexandria" with another city name
+
 and then it will display the current temperature in degree celsius.
