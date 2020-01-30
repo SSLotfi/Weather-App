@@ -11,7 +11,7 @@ def greet():
     """get city name and show weather
     """
     # get username from the url params
-    cityname = request.args.get('city name', default=None, type=str)
+    cityname = request.args.get('cityname', default=None, type=str)
 
     response = ""
 
