@@ -1,4 +1,4 @@
-from flask import request, flask
+from flask import request, Flask
 import requests
 import json
 
